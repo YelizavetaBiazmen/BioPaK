@@ -10,10 +10,10 @@ The backlight is based on Arduino. There are several modes:
 2nd adjustable brightness.  
 3rd lights only if it's a day.   
 4th maximum brightness.  
-Для подсветки используется RGB лента  12 в. (управление черер мосфеты). Используется Потенциометр для изменения уровня яркости, Фото-резистер для определения дневного света и два светодиода для отображения номера режима в бинарном формате.  
-Файл BIOPAK.ino содержит в себе основную программу.  
-Файлы RGBLed.cpp и RGBLed.h являются библиотеками, которые необходимо скачать при работе с программой.  
-Файлы формата jpg (florarium.jpg и schema.jpg) предназначены для показа получившейся схемы и флорариума.
+The backlight uses a 12V RGB strip. (Cherer mosfety control). Used potentiometer to change the concentration level, Photoresistor for daylight detection and two LED to display the mode number in binary format.  
+The BIOPAK.ino file contains the main program.  
+The RGBLed.cpp and RGBLed.h files are libraries that must be downloaded when working with the program.  
+The jpg format files (florarium.jpg and schema.jpg) are designed to display the resulting scheme and florarium.
 ![Схема](schema.jpg "Флорариум - cхема")
 
 
