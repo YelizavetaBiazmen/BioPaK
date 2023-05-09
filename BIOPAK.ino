@@ -93,7 +93,7 @@ void mode0LightsOff(byte mode) {
   //digitalWrite(LIGHTS_PIN, LOW);
   LedStripRGB.turnOff();             
 }
-void loop()   {
+void loop()   { //sprawdzamy, czy jest przecisk nacisnęty i wywołujemy odpowiednią funkcję
   for(byte i = 0; i < 3; i++) {
     byte sdv = gMode >> i;
     bool zeroBite = sdv & 1;
