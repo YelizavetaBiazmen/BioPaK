@@ -15,5 +15,3 @@ Podświetlenie wykorzystuje pasek 12V RGB. (Kontrola mosfety Cherer). Zastosowan
 Plik BIOPAK.ino zawiera program główny.
 Pliki RGBLed.cpp i RGBLed.h to biblioteki, które należy pobrać podczas pracy z programem.
 Pliki w formacie jpg (florarium.jpg i schema.jpg) są przeznaczone do wyświetlania wynikowego schematu i florarium.
-
-
