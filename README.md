@@ -1,19 +1,19 @@
 # BioPaK
-![Флорариум](florarium.jpg "Флорариум")
+![Флорариум](florarium.jpg "Florarium")
 ## Программа для умной подсветки флорариума https://ru.wikipedia.org/wiki/%D0%A4%D0%BB%D0%BE%D1%80%D0%B0%D1%80%D0%B8%D1%83%D0%BC
-Цитата из вики:
->Флора́риум, расти́тельный терра́риум — специальная закрытая ёмкость, изготовленная из стекла или других прозрачных материалов и предназначенная для содержания и разведения растений. Внутри создаются определённая влажность воздуха и температура. Часто используется для выращивания прихотливых тропических растений.
+Cytat z wikipedii:
 
-### Принцип работы подсветки:
-Подсветка сделана на базе Arduino. Есть несколько режимов:   
-1 Первый - не горит.  
-2 Второй - с регулируемым уровнем яркости.  
-3 Третий  - работает только при свете дня.   
-4 Четвертый - горит на максимальной яркости.  
-Для подсветки используется RGB лента  12 в. (управление черер мосфеты). Используется Потенциометр для изменения уровня яркости, Фото-резистер для определения дневного света и два светодиода для отображения номера режима в бинарном формате.  
-Файл BIOPAK.ino содержит в себе основную программу.  
-Файлы RGBLed.cpp и RGBLed.h являются библиотеками, которые необходимо скачать при работе с программой.  
-Файлы формата jpg (florarium.jpg и schema.jpg) предназначены для показа получившейся схемы и флорариума.
-![Схема](schema.jpg "Флорариум - cхема")
+Florarium, terrarium roślinne - specjalny zamknięty pojemnik wykonany ze szkła lub innych przezroczystych materiałów przeznaczony do przechowywania i hodowli roślin. Wewnątrz tworzy się określona wilgotność i temperatura. Często używany do uprawy kapryśnych roślin tropikalnych.
+
+Jak działa podświetlenie:
+Podświetlenie oparte jest na Arduino. Istnieje kilka trybów:
+1. - nie świeci.
+2. regulowana jasność.
+Trzecie światło tylko w ciągu dnia.
+4. maksymalna jasność.
+Podświetlenie wykorzystuje pasek 12V RGB. (Kontrola mosfety Cherer). Zastosowano potencjometr do zmiany poziomu stężenia, fotorezystor do wykrywania światła dziennego oraz dwie diody LED do wyświetlania numeru trybu w formacie binarnym.
+Plik BIOPAK.ino zawiera program główny.
+Pliki RGBLed.cpp i RGBLed.h to biblioteki, które należy pobrać podczas pracy z programem.
+Pliki w formacie jpg (florarium.jpg i schema.jpg) są przeznaczone do wyświetlania wynikowego schematu i florarium.
 
 
