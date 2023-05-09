@@ -1,16 +1,20 @@
 //////////////////////////////////////////////////////////
-#include "Arduino.h"
-#include "RGBLed.h"
-#define LEDSTRIPRGB_PIN_SIGB  3
+//importujemy bibliotekę
+#include "Arduino.h" // tu
+#include "RGBLed.h" // i tu
+// definiojemy stałe
+#define LEDSTRIPRGB_PIN_SIGB  3 
 #define LEDSTRIPRGB_PIN_SIGR  9
 #define LEDSTRIPRGB_PIN_SIGG  11
 #define BUTTON_PIN 13 // button pin
 #define LedStripRGB_TYPE COMMON_CATHODE
+// aż dotąd
 RGBLed LedStripRGB(LEDSTRIPRGB_PIN_SIGR,LEDSTRIPRGB_PIN_SIGG,LEDSTRIPRGB_PIN_SIGB,LedStripRGB_TYPE);
 byte bV;// button value
 byte gMode = 0;
 byte oV = 0; // old mode
-int ledRound = 0; 
+int ledRound = 0;
+// definiojemy stałe
 #define MAX_MODES 4
 #define LED_QTY 2
 #define LED_PIN_START 5
@@ -18,6 +22,7 @@ int ledRound = 0;
 //#define SOUND_PIN A0
 #define LIGHTS_SENSOR_PIN 12
 #define POTEN_PIN 0
+// aż dotąd
 //bool statuslamp=false;
 void setup() {
     pinMode(BUTTON_PIN,INPUT);// set LED pin as “output”
@@ -28,22 +33,22 @@ void setup() {
       pinMode(LED_PIN_START + i, OUTPUT); 
       
     }
-    Serial.begin(9600);
+    Serial.begin(9600); 
     LedStripRGB.turnOff();              
 }
 
 byte changeMode(byte mode = 0){
   oV =  bV;
   bV=digitalRead(BUTTON_PIN);// read the level value of pin 7 and assign if to val
-  Serial.println(bV);
+  Serial.println(bV); // pokazuje dane na ekranie
    
   if((bV ==  LOW)&&(oV == HIGH)){
     mode++;
     if(mode >= MAX_MODES){
       mode = 0;
     }
-    delay(100);
-    Serial.println(mode);
+    delay(100); // czeka
+    Serial.println(mode);// pokazuje dane na ekranie
   } 
   return mode;
 }
@@ -57,7 +62,7 @@ void mode1AdjustableLights(byte mode) {
   ledRound = round((val/10.0)*2.55);
   ledRound = round((ledRound + ledRoundOld*7)/8);
   ledRound = ledRound > 250 ? 255 : ledRound;
-  Serial.println(ledRound);// display value of val
+  Serial.println(ledRound);// display value of val // pokazuje dane na ekranie
   //analogWrite(LIGHTS_PIN,ledRound);
   LedStripRGB.setRGB(ledRound, ledRound, ledRound);
 }
@@ -70,7 +75,7 @@ void mode2LightSensorLights(byte mode) {
       //digitalWrite (LIGHTS_PIN, HIGH);
         LedStripRGB.setRGB(255, 255, 255);
   }
-  Serial.println(digitalRead(LIGHTS_SENSOR_PIN));
+  Serial.println(digitalRead(LIGHTS_SENSOR_PIN)); // pokazuje dane na ekranie
 }
 /*void mode3SoundSensorLights(byte mode) {
   
