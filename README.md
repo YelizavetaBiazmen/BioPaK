@@ -7,7 +7,7 @@ Florarium, terrarium roślinne - specjalny zamknięty pojemnik wykonany ze szkł
 
 Jak działa podświetlenie:
 Podświetlenie oparte jest na Arduino. Istnieje kilka trybów:
-1. - nie świeci.
+1.  nie świeci.
 2. regulowana jasność.
 Trzecie światło tylko w ciągu dnia.
 4. maksymalna jasność.
