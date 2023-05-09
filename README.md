@@ -1,6 +1,6 @@
 # BioPaK
 ![Флорариум](florarium.jpg "Florarium")
-## Программа для умной подсветки флорариума https://ru.wikipedia.org/wiki/%D0%A4%D0%BB%D0%BE%D1%80%D0%B0%D1%80%D0%B8%D1%83%D0%BC
+##  https://ru.wikipedia.org/wiki/%D0%A4%D0%BB%D0%BE%D1%80%D0%B0%D1%80%D0%B8%D1%83%D0%BC
 Cytat z wikipedii:
 
 Florarium, terrarium roślinne - specjalny zamknięty pojemnik wykonany ze szkła lub innych przezroczystych materiałów przeznaczony do przechowywania i hodowli roślin. Wewnątrz tworzy się określona wilgotność i temperatura. Często używany do uprawy kapryśnych roślin tropikalnych.
