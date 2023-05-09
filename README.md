@@ -7,10 +7,10 @@ Florarium, terrarium roślinne - specjalny zamknięty pojemnik wykonany ze szkł
 
 Jak działa podświetlenie:
 Podświetlenie oparte jest na Arduino. Istnieje kilka trybów:
-1.  nie świeci.
-2. regulowana jasność.
-Trzecie światło tylko w ciągu dnia.
-4. maksymalna jasność.
+Pierwszy  nie świeci.
+Drugi regulowana jasność.
+Trzeci światło tylko w ciągu dnia.
+Czwarty maksymalna jasność.
 Podświetlenie wykorzystuje pasek 12V RGB. (Kontrola mosfety Cherer). Zastosowano potencjometr do zmiany poziomu stężenia, fotorezystor do wykrywania światła dziennego oraz dwie diody LED do wyświetlania numeru trybu w formacie binarnym.
 Plik BIOPAK.ino zawiera program główny.
 Pliki RGBLed.cpp i RGBLed.h to biblioteki, które należy pobrać podczas pracy z programem.
