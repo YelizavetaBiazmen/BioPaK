@@ -24,16 +24,15 @@ int ledRound = 0;
 #define POTEN_PIN 0
 // aż dotąd
 //bool statuslamp=false;
-void setup() {// odtąd
+void setup() {
     pinMode(BUTTON_PIN,INPUT);// set LED pin as “output”
     //pinMode(SOUND_PIN,INPUT);
     //pinMode(LIGHTS_PIN, OUTPUT);
     pinMode(LIGHTS_SENSOR_PIN, INPUT);
     for(byte i = 0; i < 3; i++) {
-      pinMode(LED_PIN_START + i, OUTPUT);//odczytujemy znaczenia 
+      pinMode(LED_PIN_START + i, OUTPUT); 
       
     }
-    //i dotąd były ustawiane piny wejścia lub wyjścia 
     Serial.begin(9600); 
     LedStripRGB.turnOff();              
 }
@@ -43,9 +42,9 @@ byte changeMode(byte mode = 0){
   bV=digitalRead(BUTTON_PIN);// read the level value of pin 7 and assign if to val
   Serial.println(bV); // pokazuje dane na ekranie
    
-  if((bV ==  LOW)&&(oV == HIGH)){ //jeśli przecisk jest nacisnięty, zmienia się tryb
+  if((bV ==  LOW)&&(oV == HIGH)){
     mode++;
-    if(mode >= MAX_MODES){// jeśli kliknęliśmy przecisk więcej razy, niż jest trybów, znowy idzie pierwszy
+    if(mode >= MAX_MODES){
       mode = 0;
     }
     delay(100); // czeka
@@ -54,7 +53,7 @@ byte changeMode(byte mode = 0){
   return mode;
 }
 void mode3LightsOn(byte mode) {
-  LedStripRGB.setRGB(255, 255, 255);  // ustawia się, jak świecą przy trzecim trybie
+  LedStripRGB.setRGB(255, 255, 255);  
   //digitalWrite(LIGHTS_PIN, HIGH);
 }
 void mode1AdjustableLights(byte mode) {
