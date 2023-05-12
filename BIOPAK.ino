@@ -2,7 +2,7 @@
 //importujemy bibliotekę
 #include "Arduino.h" // tu
 #include "RGBLed.h" // i tu
-// definiojemy stałe
+// definiójemy stałe
 #define LEDSTRIPRGB_PIN_SIGB  3 
 #define LEDSTRIPRGB_PIN_SIGR  9
 #define LEDSTRIPRGB_PIN_SIGG  11
