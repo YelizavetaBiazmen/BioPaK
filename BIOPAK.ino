@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////
-//importujemy bibliotekę
+//importujemy bibliotek
 #include "Arduino.h" // tu
 #include "RGBLed.h" // i tu
 // definiójemy stałe
