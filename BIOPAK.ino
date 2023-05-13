@@ -8,7 +8,7 @@
 #define LEDSTRIPRGB_PIN_SIGG  11
 #define BUTTON_PIN 13 // button pin
 #define LedStripRGB_TYPE COMMON_CATHODE
-// aż dotąd
+
 RGBLed LedStripRGB(LEDSTRIPRGB_PIN_SIGR,LEDSTRIPRGB_PIN_SIGG,LEDSTRIPRGB_PIN_SIGB,LedStripRGB_TYPE);
 byte bV;// button value
 byte gMode = 0;
@@ -22,9 +22,9 @@ int ledRound = 0;
 //#define SOUND_PIN A0
 #define LIGHTS_SENSOR_PIN 12
 #define POTEN_PIN 0
-// aż dotąd
+
 //bool statuslamp=false;
-void setup() {// odtąd
+void setup() {
     pinMode(BUTTON_PIN,INPUT);// set LED pin as “output”
     //pinMode(SOUND_PIN,INPUT);
     //pinMode(LIGHTS_PIN, OUTPUT);
@@ -33,7 +33,7 @@ void setup() {// odtąd
       pinMode(LED_PIN_START + i, OUTPUT);//odczytujemy znaczenia 
       
     }
-    //i dotąd były ustawiane piny wejścia lub wyjścia 
+    
     Serial.begin(9600); 
     LedStripRGB.turnOff();              
 }
