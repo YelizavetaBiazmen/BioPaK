@@ -1,4 +1,5 @@
 //////////////////////////////////////////////////////////
+
 //importujemy bibliotekę
 #include "Arduino.h" 
 #include "RGBLed.h" 
@@ -11,6 +12,16 @@
 
 
 #define BUTTON_PIN 13 // button pin
+
+
+#include "Arduino.h" 
+#include "RGBLed.h" 
+
+#define LEDSTRIPRGB_PIN_SIGB  3 
+#define LEDSTRIPRGB_PIN_SIGR  9
+#define LEDSTRIPRGB_PIN_SIGG  11
+#define BUTTON_PIN 13 
+
 #define LedStripRGB_TYPE COMMON_CATHODE
 
 RGBLed LedStripRGB(LEDSTRIPRGB_PIN_SIGR,LEDSTRIPRGB_PIN_SIGG,LEDSTRIPRGB_PIN_SIGB,LedStripRGB_TYPE);
@@ -18,7 +29,7 @@ byte bV;// button value
 byte gMode = 0;
 byte oV = 0; // old mode
 int ledRound = 0;
-// definiojemy stałe
+
 #define MAX_MODES 4
 #define LED_QTY 2 // ilość LEDów pokazujących binarny numer trybu 
 #define LED_PIN_START 5 // pierwszy pin LEDa, pokazującego binarny numer trybu 
@@ -27,12 +38,16 @@ int ledRound = 0;
 #define LIGHTS_SENSOR_PIN 12
 #define POTEN_PIN 0
 
+
+
+
 //bool statuslamp=false;
 void setup() {
     pinMode(BUTTON_PIN,INPUT);// set LED pin as “output”
     //pinMode(SOUND_PIN,INPUT);
     //pinMode(LIGHTS_PIN, OUTPUT);
     pinMode(LIGHTS_SENSOR_PIN, INPUT);
+
     
     //cykl dla otrzymania pinów kolejych LEDów, pokazujących binarny numer trybu
     for(byte i = 0; i <LED_QTY ; i++) {
@@ -40,6 +55,12 @@ void setup() {
       
     }
     
+
+    for(byte i = 0; i < 3; i++) {
+      pinMode(LED_PIN_START + i, OUTPUT); 
+      
+    }
+
     Serial.begin(9600); 
     LedStripRGB.turnOff();  //wyłączamy LED na początku działania programy            
 }
@@ -49,8 +70,9 @@ byte changeMode(byte mode = 0){
     //robimy to dla porównania znaczeń i następnego rozumienia, czy został nacisnięty przecisk 
     
   bV=digitalRead(BUTTON_PIN);// read the level value of pin 7 and assign if to val
-  Serial.println(bV); // pokazuje dane na ekranie
+  Serial.println(bV); 
    
+
   if((bV ==  LOW)&&(oV == HIGH)){ //wpisujemy warunki, które mówią, czy został nacisnięty przecisk
       // jeśli nowe znacze low, a stare high, to przecist zodtał nacisnęty
     mode++;
@@ -58,6 +80,14 @@ byte changeMode(byte mode = 0){
       mode = 0;
     }
     delay(100);
+
+  if((bV ==  LOW)&&(oV == HIGH)){
+    mode++;
+    if(mode >= MAX_MODES){
+      mode = 0;
+    }
+    delay(100); // czeka
+
     Serial.println(mode);
   } 
   return mode;
@@ -65,7 +95,7 @@ byte changeMode(byte mode = 0){
 
 //trzeci tryb włącza LED na max jasność
 void mode3LightsOn(byte mode) {
-  LedStripRGB.setRGB(255, 255, 255);  // ustawia się, jak świecą przy trzecim trybie
+  LedStripRGB.setRGB(255, 255, 255);  
   //digitalWrite(LIGHTS_PIN, HIGH);
 }
 
@@ -76,7 +106,7 @@ void mode1AdjustableLights(byte mode) {
   ledRound = round((val/10.0)*2.55); //unikamy migania LEDa, jeśli już jest ciemno, ale nie do końca
   ledRound = round((ledRound + ledRoundOld*7)/8);
   ledRound = ledRound > 250 ? 255 : ledRound;
-  Serial.println(ledRound);// display value of val // pokazuje dane na ekranie
+  Serial.println(ledRound);// display value of val 
   //analogWrite(LIGHTS_PIN,ledRound);
   LedStripRGB.setRGB(ledRound, ledRound, ledRound);
 }
@@ -93,7 +123,7 @@ void mode2LightSensorLights(byte mode) {
       //digitalWrite (LIGHTS_PIN, HIGH);
         LedStripRGB.setRGB(255, 255, 255);
   }
-  Serial.println(digitalRead(LIGHTS_SENSOR_PIN)); // pokazuje dane na ekranie
+  Serial.println(digitalRead(LIGHTS_SENSOR_PIN)); 
 }
 
 //tu mam dodatkowy tryb, LED świeci, kiedy słyszy głośny dzięk
