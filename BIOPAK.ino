@@ -16,8 +16,8 @@ byte oV = 0; // old mode
 int ledRound = 0;
 // definiojemy stałe
 #define MAX_MODES 4
-#define LED_QTY 2
-#define LED_PIN_START 5
+#define LED_QTY 2 // ilość LEDów pokazujących binarny numer trybu 
+#define LED_PIN_START 5 // pierwszy pin LEDa, pokazującego binarny numer trybu 
 //#define LIGHTS_PIN 3
 //#define SOUND_PIN A0
 #define LIGHTS_SENSOR_PIN 12
@@ -109,6 +109,8 @@ void loop()   { //sprawdzamy, czy jest przecisk nacisnęty i wywołujemy odpowie
   for(byte i = 0; i < 3; i++) {
     byte sdv = gMode >> i;
     bool zeroBite = sdv & 1;
+      
+    // cykl do wyświetlenia binarnego numeru trybu
     if(zeroBite) {
       digitalWrite(LED_PIN_START + i, HIGH); 
     } else {
