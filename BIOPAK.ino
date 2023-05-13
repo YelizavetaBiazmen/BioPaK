@@ -43,9 +43,10 @@ byte changeMode(byte mode = 0){
   bV=digitalRead(BUTTON_PIN);// read the level value of pin 7 and assign if to val
   Serial.println(bV); // pokazuje dane na ekranie
    
-  if((bV ==  LOW)&&(oV == HIGH)){ //jeśli przecisk jest nacisnięty, zmienia się tryb
+  if((bV ==  LOW)&&(oV == HIGH)){ //wpisujemy warunki, które mówią, czy został nacisnięty przecisk
+      // jeśli nowe znacze low, a stare high, to przecist zodtał nacisnęty
     mode++;
-    if(mode >= MAX_MODES){// jeśli kliknęliśmy przecisk więcej razy, niż jest trybów, znowy idzie pierwszy
+    if(mode >= MAX_MODES){// jeśli kliknęliśmy przecisk więcej razy, niż jest trybów, znowu idzie zerowy
       mode = 0;
     }
     delay(100); // czeka
@@ -53,10 +54,14 @@ byte changeMode(byte mode = 0){
   } 
   return mode;
 }
+
+//trzeci tryb włącza LED na max jasność
 void mode3LightsOn(byte mode) {
   LedStripRGB.setRGB(255, 255, 255);  // ustawia się, jak świecą przy trzecim trybie
   //digitalWrite(LIGHTS_PIN, HIGH);
 }
+
+// pierwsy tryb włącza LED i daje możliwość zmienić jasność
 void mode1AdjustableLights(byte mode) {
   int ledRoundOld = ledRound;
   int val=analogRead(POTEN_PIN);// read the analog value from the sensor and assign it to val
@@ -67,6 +72,8 @@ void mode1AdjustableLights(byte mode) {
   //analogWrite(LIGHTS_PIN,ledRound);
   LedStripRGB.setRGB(ledRound, ledRound, ledRound);
 }
+
+// drugi tryb włącza LED, tylko jeśli widzi światło
 void mode2LightSensorLights(byte mode) {
   if (digitalRead(LIGHTS_SENSOR_PIN) == HIGH) {
       //digitalWrite (LIGHTS_PIN, LOW);
@@ -78,6 +85,9 @@ void mode2LightSensorLights(byte mode) {
   }
   Serial.println(digitalRead(LIGHTS_SENSOR_PIN)); // pokazuje dane na ekranie
 }
+
+//tu mam dodatkowy tryb, LED świeci, kiedy słyszy głośny dzięk
+
 /*void mode3SoundSensorLights(byte mode) {
   
   int value = analogRead(A0);
@@ -89,6 +99,8 @@ void mode2LightSensorLights(byte mode) {
       delay(50);
    }
 }*/
+
+// zerowy tryb wyłącza LED
 void mode0LightsOff(byte mode) {
   //digitalWrite(LIGHTS_PIN, LOW);
   LedStripRGB.turnOff();             
