@@ -1,133 +1,82 @@
+/////////////////////////////////////////////////////////
+
 #include "Arduino.h" 
-#include "RGBLed.h" 
 
-//stałe dla LEDa
-#define LEDSTRIPRGB_PIN_SIGB  3 
-#define LEDSTRIPRGB_PIN_SIGR  9
-#define LEDSTRIPRGB_PIN_SIGG  11
-
-#define BUTTON_PIN 13 
-
-#define LedStripRGB_TYPE COMMON_CATHODE
-
-RGBLed LedStripRGB(LEDSTRIPRGB_PIN_SIGR,LEDSTRIPRGB_PIN_SIGG,LEDSTRIPRGB_PIN_SIGB,LedStripRGB_TYPE);
+#define LedPin 3
 byte bV;// button value
 byte gMode = 0;
 byte oV = 0; // old mode
 int ledRound = 0;
 
-//wpisujemy piny 
 #define MAX_MODES 4
-#define LED_QTY 2 
-#define LED_PIN_START 5 
-//#define LIGHTS_PIN 3
-//#define SOUND_PIN A0
-#define LIGHTS_SENSOR_PIN 12
-#define POTEN_PIN 0
-
-
-//bool statuslamp=false;
-
-
+#define LED_QTY 2
+#define LED_PIN_START 5
+#define LIGHTS_SENSOR_PIN A2
+#define POTEN_PIN A0
+#define BUTTON_PIN 7
 void setup() {
-    pinMode(BUTTON_PIN,INPUT);// set LED pin as “output”
-    //pinMode(SOUND_PIN,INPUT);
-    //pinMode(LIGHTS_PIN, OUTPUT);
+    pinMode(LedPin, OUTPUT);
+    pinMode(BUTTON_PIN,INPUT);
     pinMode(LIGHTS_SENSOR_PIN, INPUT);
-
-    
-    //cykl dla definiowania pinów LEDów, potrzebnych dla numeracji trybów
-    for(byte i = 0; i <LED_QTY ; i++) {
-      pinMode(LED_PIN_START + i, OUTPUT);
+    pinMode(POTEN_PIN, INPUT);
+    for(byte i = 0; i < LED_QTY; i++) {
+      pinMode(LED_PIN_START + i, OUTPUT); 
       
     }
-
     Serial.begin(9600); 
-    LedStripRGB.turnOff();   // wyłączamy LED na początek dziłania programy         
+    digitalWrite(LedPin, LOW);               
 }
 
 byte changeMode(byte mode = 0){
-  oV =  bV; //wpisujemy znaczenie przecisku, przed tym jak nowe znaczenie zastąpi stare. robimy to dla porównania 
-    
+  oV =  bV;
   bV=digitalRead(BUTTON_PIN);// read the level value of pin 7 and assign if to val
-  Serial.println(bV); 
-   
-
-  if((bV ==  LOW)&&(oV == HIGH)){ 
+  //Serial.println(bV);
+  //Serial.println(999); 
+  delay(10); 
+  if((bV ==  0)&&(oV == 1)){
     mode++;
     if(mode >= MAX_MODES){
       mode = 0;
     }
-    delay(100);
-
- 
-
+    delay(100); // czeka
     Serial.println(mode);
   } 
   return mode;
 }
-
-
 void mode3LightsOn(byte mode) {
-  LedStripRGB.setRGB(255, 255, 255);  
-  //digitalWrite(LIGHTS_PIN, HIGH);
+  digitalWrite(LedPin, HIGH);  
 }
-
-
 void mode1AdjustableLights(byte mode) {
-
   int ledRoundOld = ledRound;
   int val=analogRead(POTEN_PIN);// read the analog value from the sensor and assign it to val
+  val = val / 3.89;                      
+   analogWrite(LedPin, val);
+  //ledRound = round((val/10.0)*2.55);
+  //ledRound = round((ledRound + ledRoundOld*7)/8);
+  //ledRound = ledRound > 250 ? 255 : ledRound;
 
-
-  ledRound = round((val/10.0)*2.55); 
-  ledRound = round((ledRound + ledRoundOld*7)/8);
-  ledRound = ledRound > 250 ? 255 : ledRound;
-  Serial.println(ledRound);// display value of val 
-  //analogWrite(LIGHTS_PIN,ledRound);
-  LedStripRGB.setRGB(ledRound, ledRound, ledRound);
+  Serial.println(ledRound);// display value of val
 }
-
-
 void mode2LightSensorLights(byte mode) {
-    
-    
-  if (digitalRead(LIGHTS_SENSOR_PIN) == HIGH) {
+  int sensorValue = analogRead(LIGHTS_SENSOR_PIN);
+  if (sensorValue < 50) {
       //digitalWrite (LIGHTS_PIN, LOW);
-      LedStripRGB.turnOff();   
+      analogWrite(LedPin, LOW);   
   }
-   else  {
+  else  {
       //digitalWrite (LIGHTS_PIN, HIGH);
-        LedStripRGB.setRGB(255, 255, 255);
+        analogWrite(LedPin, HIGH);
   }
-  Serial.println(digitalRead(LIGHTS_SENSOR_PIN)); 
+ // Serial.println(digitalRead(LIGHTS_SENSOR_PIN)); 
 }
-
-
-
-/*void mode3SoundSensorLights(byte mode) {
-  
-  int value = analogRead(A0);
-   Serial.println (value); 
-   if(value>30) {
-    Serial.println (value);
-      statuslamp=!statuslamp; 
-      digitalWrite(LIGHTS_PIN,statuslamp);
-      delay(50);
-   }
-}*/
-
-
 void mode0LightsOff(byte mode) {
   //digitalWrite(LIGHTS_PIN, LOW);
-  LedStripRGB.turnOff();             
+  digitalWrite(LedPin, LOW);             
 }
-void loop()   { 
-  for(byte i = 0; i < 3; i++) {
+void loop()   {
+  for(byte i = 0; i < LED_QTY; i++) {
     byte sdv = gMode >> i;
     bool zeroBite = sdv & 1;
-      
-    
     if(zeroBite) {
       digitalWrite(LED_PIN_START + i, HIGH); 
     } else {
