@@ -1,25 +1,11 @@
-//////////////////////////
-
-
 #include "Arduino.h" 
 #include "RGBLed.h" 
 
-
-
+//stałe dla LEDa
 #define LEDSTRIPRGB_PIN_SIGB  3 
 #define LEDSTRIPRGB_PIN_SIGR  9
 #define LEDSTRIPRGB_PIN_SIGG  11
 
-
-#define BUTTON_PIN 13 // button pin
-
-
-#include "Arduino.h" 
-#include "RGBLed.h" 
-
-#define LEDSTRIPRGB_PIN_SIGB  3 
-#define LEDSTRIPRGB_PIN_SIGR  9
-#define LEDSTRIPRGB_PIN_SIGG  11
 #define BUTTON_PIN 13 
 
 #define LedStripRGB_TYPE COMMON_CATHODE
@@ -30,6 +16,7 @@ byte gMode = 0;
 byte oV = 0; // old mode
 int ledRound = 0;
 
+//wpisujemy piny 
 #define MAX_MODES 4
 #define LED_QTY 2 
 #define LED_PIN_START 5 
@@ -39,9 +26,9 @@ int ledRound = 0;
 #define POTEN_PIN 0
 
 
-
-
 //bool statuslamp=false;
+
+
 void setup() {
     pinMode(BUTTON_PIN,INPUT);// set LED pin as “output”
     //pinMode(SOUND_PIN,INPUT);
@@ -49,24 +36,18 @@ void setup() {
     pinMode(LIGHTS_SENSOR_PIN, INPUT);
 
     
-    
+    //cykl dla definiowania pinów LEDów, potrzebnych dla numeracji trybów
     for(byte i = 0; i <LED_QTY ; i++) {
       pinMode(LED_PIN_START + i, OUTPUT);
       
     }
-    
-
-    for(byte i = 0; i < 3; i++) {
-      pinMode(LED_PIN_START + i, OUTPUT); 
-      
-    }
 
     Serial.begin(9600); 
-    LedStripRGB.turnOff();            
+    LedStripRGB.turnOff();   // wyłączamy LED na początek dziłania programy         
 }
 
 byte changeMode(byte mode = 0){
-  oV =  bV;  
+  oV =  bV; //wpisujemy znaczenie przecisku, przed tym jak nowe znaczenie zastąpi stare. robimy to dla porównania 
     
   bV=digitalRead(BUTTON_PIN);// read the level value of pin 7 and assign if to val
   Serial.println(bV); 
@@ -79,12 +60,7 @@ byte changeMode(byte mode = 0){
     }
     delay(100);
 
-  if((bV ==  LOW)&&(oV == HIGH)){
-    mode++;
-    if(mode >= MAX_MODES){
-      mode = 0;
-    }
-    delay(100); 
+ 
 
     Serial.println(mode);
   } 
@@ -103,8 +79,6 @@ void mode1AdjustableLights(byte mode) {
   int ledRoundOld = ledRound;
   int val=analogRead(POTEN_PIN);// read the analog value from the sensor and assign it to val
 
-  int ledRoundOld = ledRound;
-  int val=analogRead(POTEN_PIN);
 
   ledRound = round((val/10.0)*2.55); 
   ledRound = round((ledRound + ledRoundOld*7)/8);
