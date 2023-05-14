@@ -99,8 +99,13 @@ void mode3LightsOn(byte mode) {
 
 
 void mode1AdjustableLights(byte mode) {
+
+  int ledRoundOld = ledRound; // wpisujemystare znaczenie do innej zmiennej, przed tym, jak ją zastąpi inne znaczenie
+  int val=analogRead(POTEN_PIN);// read the analog value from the sensor and assign it to val
+
   int ledRoundOld = ledRound;
   int val=analogRead(POTEN_PIN);
+
   ledRound = round((val/10.0)*2.55); 
   ledRound = round((ledRound + ledRoundOld*7)/8);
   ledRound = ledRound > 250 ? 255 : ledRound;
